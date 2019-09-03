@@ -40,38 +40,59 @@ public class LottoServiceImpl implements LottoService {
 		String lotto = "";
 		int[] nums = new int[6];
 		int num = 0;
-		boolean b= false;
 		for(int i = 0; i<nums.length; i++) {
-			nums[i] = Integer.parseInt(createBall());
-			if(nums[i] == 0) {
+			num = Integer.parseInt(createBall());		
+			if(exist(nums, num)) {
+				nums[i] = num;
+			}else {
 				i--;
-			} else {
-				for(int j= 0; j<i; j++) {
-					if(nums[i] == nums[j]) {
-						i--;
-						break;
-					}else {
-						break;
+			}
+			System.out.print(nums[i]);
+
+		}
+		nums = bubbleSort(nums, true);
+		
+		for(int i= 0; i<nums.length; i++) {
+			if(i != nums.length-1) {
+				lotto+=nums[i]+",";
+			}else {
+				lotto+=nums[i];
+			}
+		}
+		return lotto;
+	}
+	@Override
+	public boolean exist(int[] arr, int a) {
+		boolean b = false;
+		for(int i : arr ){
+			if(i != a) {
+				b= true;
+			}
+		}
+		return b;
+	}
+	@Override
+	public int[] bubbleSort(int[] nums, boolean flag) {
+		int num = 0;
+		for(int i = 0; i<nums.length-1; i++) {
+			for(int j = 0; j<nums.length-1; j++) {
+				if(flag) {
+					if(nums[j]>nums[j+1]) {
+						num = nums[j];
+						nums[j] = nums[j+1];
+						nums[j+1] = num;
+					}
+				} else {
+					if(nums[j]<nums[j+1]) {
+						num = nums[j];
+						nums[j] = nums[j+1];
+						nums[j+1] = num;
 					}
 				}
+				
 			}
 		}
-		for(int i = 0; i<nums.length-1; i++) {
-			b=false;
-			for(int j = 0; j<nums.length-1-i; j++) {
-				if(nums[j]>nums[j+1]) {
-					num = nums[j];
-					nums[j] = nums[j+1];
-					nums[j+1] = num;
-					b=true;
-				}
-			}
-			if(!b) {
-				break;
-			}
-		}
-		lotto = String.format("%s,%s,%s,%s,%s,%s", nums[0],nums[1],nums[2],nums[3],nums[4],nums[5]);
-		return lotto;
+		return nums;
 	}
 	
 

@@ -1,12 +1,8 @@
 package com.lotto.web.daoImples;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.FileReader;
 
 import com.lotto.web.daos.ConsumerDAO;
 import com.lotto.web.domains.ConsumerBean;
